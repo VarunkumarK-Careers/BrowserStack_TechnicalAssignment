@@ -83,6 +83,11 @@
             <artifactId>google-api-services-sheets</artifactId>
             <version>v4-rev20220927-2.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.4.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
