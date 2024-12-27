@@ -6,6 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import java.time.Duration;
 
@@ -26,10 +32,13 @@ public class ELPais {
         String Subheader = Editorials.getText();
         System.out.println(Subheader);
 
-        WebElement Hamburgermenu = driver.findElement(By.xpath("//button[@id='btn_open_hamburger']"));
-        Hamburgermenu.click();
 
-        WebElement Opinion = driver.findElement(By.xpath("//a[@cmp-ltrk='header_hamburguesa'][normalize-space()='Opinión']"));
+
+        //WebElement Hamburgermenu = driver.findElement(By.xpath("//button[@id='btn_open_hamburger']"));
+        //Hamburgermenu.click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        WebElement Opinion = driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='Opinión']"));
         Opinion.click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -39,4 +48,5 @@ public class ELPais {
 
     }
 }
+
 
