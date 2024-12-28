@@ -12,14 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class JSONObject1 {
-    public JSONObject1(String response) {
+public class JSONObject2 {
+    public JSONObject2(String response) {
 
     }
 
 
 
-    public static String translateText1(String title1, String content1, String News1) {
+    public static String translateText1(String title2, String content2, String News2) {
         try {
             String apiKey = "0c1e75a0e4msh65faf643b9cac68p1f67f5jsn444e30548033";
             String apiUrl = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
@@ -34,7 +34,7 @@ public class JSONObject1 {
             connection.setDoOutput(true);
 
 
-            String jsonPayload = "{ \"q\": \"" + title1 + " " + content1 + " " + News1 + "\", \"from\": \"es\", \"to\": \"en\" }";
+            String jsonPayload = "{ \"q\": \" " + title2 + " " + content2 + " " + News2 + "\", \"from\": \"es\", \"to\": \"en\" }";
 
 
 
@@ -65,16 +65,16 @@ public class JSONObject1 {
 
 
 
-    public String getString(String translatedText1) {
+    public String getString(String translatedText2) {
 
-        System.out.println(translatedText1);
-        return translatedText1;
+        System.out.println(translatedText2);
+        return translatedText2;
     }
 
 
 
     // Save Image Locally
-    public static void saveImage1(String imageUrl, String fileName) {
+    public static void saveImage2(String imageUrl, String fileName) {
         try {
             FileUtils.copyURLToFile(new URL(imageUrl), new File(fileName));
             System.out.println("Image saved: " + fileName);
@@ -84,7 +84,7 @@ public class JSONObject1 {
     }
 
     // Analyze Repeated Words in Translated Headers
-    public static void analyzeRepeatedWords1(Collection<String> headers) {
+    public static void analyzeRepeatedWords2(Collection<String> headers) {
         Map<String, Integer> wordCount = new HashMap<>();
         for (String header : headers) {
             String[] words = header.split("\\s+");

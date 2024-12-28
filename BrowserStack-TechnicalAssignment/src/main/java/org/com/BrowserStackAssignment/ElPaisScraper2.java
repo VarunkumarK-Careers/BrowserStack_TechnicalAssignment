@@ -11,9 +11,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.net.MalformedURLException;
 import java.util.*;
 
-import static org.com.BrowserStackAssignment.JSONObject1.*;
+import static org.com.BrowserStackAssignment.JSONObject2.*;
 
-public class ElPaisScraper1 {
+public class ElPaisScraper2 {
     public static void main(String[] args) throws MalformedURLException {
 
 
@@ -68,41 +68,41 @@ public class ElPaisScraper1 {
 
             driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='Opinión']")).click();
 
-            WebElement Header1 = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[2]/header[1]/h2[1]/a[1]"));
-            Header1.click();
+            WebElement Header2 = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[3]/header[1]/h2[1]/a[1]"));
+            Header2.click();
 
             // Step 2: Fetch First Five Articles
-            List<WebElement> articles1 = driver.findElements(By.cssSelector(".a._g._g-lg._g-o"));
+            List<WebElement> articles2 = driver.findElements(By.cssSelector(".a._g._g-lg._g-o"));
             Thread.sleep(3000);
 
 
-            Map<String, String> articleHeaders1 = new HashMap<>();
-            for (WebElement article1 : articles1) {
-                String title1 = article1.findElement(By.tagName("h1")).getText();
-                String content1 = article1.findElement(By.tagName("h2")).getText();
-                String News1 = article1.findElement(By.xpath("//div[@class='a_c clearfix']//p[1]")).getText();
-                System.out.println("Article Title1(Spanish): " + title1);
-                System.out.println("Article Content1(Spanish):" + content1);
-                System.out.println("Article News1(Spanish):" + News1);
-                articleHeaders1.put(title1,  translateText1(title1, content1, News1));
+            Map<String, String> articleHeaders2 = new HashMap<>();
+            for (WebElement article2 : articles2) {
+                String title2 = article2.findElement(By.tagName("h1")).getText();
+                String content2 = article2.findElement(By.tagName("h2")).getText();
+                String News2 = article2.findElement(By.xpath("//div[@class='a_c clearfix']//p[1]")).getText();
+                System.out.println("Article Title1(Spanish): " + title2);
+                System.out.println("Article Content1(Spanish):" + content2);
+                System.out.println("Article News1(Spanish):" + News2);
+                articleHeaders2.put(title2,  translateText1(title2, content2, News2));
 
 
                 // Fetch and download image
                 try {
-                    WebElement imageElement = article1.findElement(By.tagName("img"));
+                    WebElement imageElement = article2.findElement(By.tagName("img"));
                     String imageUrl = imageElement.getAttribute("src");
-                    saveImage1(imageUrl, title1.replaceAll("[^0-9]", "") + ".jpg");
+                    saveImage2(imageUrl, title2.replaceAll("[^0-9]", "") + ".jpg");
                 } catch (Exception e) {
-                    System.out.println("Image not found for: " + title1);
+                    System.out.println("Image not found for: " + title2);
                 }
             }
 
             // Step 3: Print Translated Titles
             System.out.println("\nTranslated Headers:");
-            articleHeaders1.forEach((spanish, english) -> System.out.println("Spanish: " + spanish + " -> English: " + english));
+            articleHeaders2.forEach((spanish, english) -> System.out.println("Spanish: " + spanish + " -> English: " + english));
 
             // Step 4: Analyze Translated Headers
-            analyzeRepeatedWords1(articleHeaders1.values());
+            analyzeRepeatedWords2(articleHeaders2.values());
 
             // Step 5: Cross-Browser Testing with BrowserStack (not included here, see notes below)
         } catch (Exception e) {
