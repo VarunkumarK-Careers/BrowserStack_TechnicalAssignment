@@ -12,14 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class JSONObject {
-    public JSONObject(String response) {
+public class JSONObject1 {
+    public JSONObject1(String response) {
 
     }
 
 
 
-    public static String translateText(String title, String content, String News) {
+    public static String translateText1(String title1, String content1, String News1) {
         try {
             String apiKey = "0c1e75a0e4msh65faf643b9cac68p1f67f5jsn444e30548033";
             String apiUrl = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
@@ -34,7 +34,7 @@ public class JSONObject {
             connection.setDoOutput(true);
 
 
-            String jsonPayload = "{ \"q\": \"" + title + " " + content + " " + News + "\", \"from\": \"es\", \"to\": \"en\" }";
+            String jsonPayload = "{ \"q\": \"" + title1 + " " + content1 + " " + News1 + "\", \"from\": \"es\", \"to\": \"en\" }";
 
 
 
@@ -65,10 +65,10 @@ public class JSONObject {
 
 
 
-    public String getString(String translatedText) {
+    public String getString(String translatedText1) {
 
-        System.out.println(translatedText);
-        return translatedText;
+        System.out.println(translatedText1);
+        return translatedText1;
     }
 
 

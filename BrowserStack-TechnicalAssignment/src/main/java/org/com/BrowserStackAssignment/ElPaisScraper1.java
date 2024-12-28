@@ -11,14 +11,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.net.MalformedURLException;
 import java.util.*;
 
-import static org.com.BrowserStackAssignment.JSONObject.*;
-import static org.com.BrowserStackAssignment.JSONObject.translateText;
+import static org.com.BrowserStackAssignment.JSONObject1.*;
 
-public class ElPaisScraper {
+public class ElPaisScraper1 {
     public static void main(String[] args) throws MalformedURLException {
 
 
-       // String USERNAME = "varunkumark_x7b0IK";
+        // String USERNAME = "varunkumark_x7b0IK";
         //String AUTOMATE_KEY = "dz6fww4CEEqAEqvhJqye";
         //String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
@@ -26,7 +25,7 @@ public class ElPaisScraper {
         ChromeOptions options = new ChromeOptions();
         WebDriver driver = new ChromeDriver(options);
 
-       // WebDriver driver = null;
+        // WebDriver driver = null;
 
 
         try {
@@ -64,33 +63,36 @@ public class ElPaisScraper {
 
 
 
+
+
+
             driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='Opinión']")).click();
 
-            WebElement Header = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[1]/header[1]/h2[1]/a[1]"));
-            Header.click();
+            WebElement Header1 = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[2]/header[1]/h2[1]/a[1]"));
+            Header1.click();
 
             // Step 2: Fetch First Five Articles
-            List<WebElement> articles = driver.findElements(By.cssSelector(".a_e.a_e-o._g._g-xs"));
+            List<WebElement> articles = driver.findElements(By.cssSelector(".a_e a_e-o _g _g-xs"));
 
 
             Map<String, String> articleHeaders = new HashMap<>();
             for (WebElement article : articles) {
-                String title = article.findElement(By.tagName("h1")).getText();
-                String content = article.findElement(By.tagName("h2")).getText();
-                String News = article.findElement(By.xpath("//div[@class='a_c clearfix']//p[1]")).getText();
-                System.out.println("Article Title (Spanish): " + title);
-                System.out.println("Article Content(Spanish):" + content );
-                System.out.println("Article News(Spanish):" + News);
-                articleHeaders.put(title,  translateText(title, content, News));
+                String title1 = article.findElement(By.tagName("h1")).getText();
+                String content1 = article.findElement(By.tagName("h2")).getText();
+                String News1 = article.findElement(By.xpath("//div[@class='a_c clearfix']//p[1]")).getText();
+                System.out.println("Article Title1(Spanish): " + title1);
+                System.out.println("Article Content1(Spanish):" + content1);
+                System.out.println("Article News1(Spanish):" + News1);
+                articleHeaders.put(title1,  translateText1(title1, content1, News1));
 
 
                 // Fetch and download image
                 try {
                     WebElement imageElement = article.findElement(By.tagName("img"));
                     String imageUrl = imageElement.getAttribute("src");
-                    saveImage(imageUrl, title.replaceAll("[^0-9]", "") + ".jpg");
+                    saveImage(imageUrl, title1.replaceAll("[^0-9]", "") + ".jpg");
                 } catch (Exception e) {
-                    System.out.println("Image not found for: " + title);
+                    System.out.println("Image not found for: " + title1);
                 }
             }
 

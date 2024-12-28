@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BrowserStack Assignment">
+    <test name="Thread1">
+        <parameter name="browser" value="Chrome" />
+        <parameter name="os" value="Windows" />
+        <parameter name="os_version" value="10" />
+        <classes>
+            <class name="org.com.BrowserStackAssignment.ElPaisScraper" />
+        </classes>
+    </test>
+    <test name="Thread2">
+        <parameter name="browser" value="Firefox" />
+        <parameter name="os" value="Windows" />
+        <parameter name="os_version" value="11" />
+        <classes>
+            <class name="org.com.BrowserStackAssignment.ElPaisScraper" />
+        </classes>
+    </test>
+    <test name="Thread3">
+        <parameter name="browser" value="Safari" />
+        <parameter name="os" value="OS X" />
+        <parameter name="os_version" value="Monterey" />
+        <classes>
+            <class name="org.com.BrowserStackAssignment.ElPaisScraper" />
+        </classes>
+    </test>
+    <test name="Thread4">
+        <parameter name="browser" value="Edge" />
+        <parameter name="os" value="Windows" />
+        <parameter name="os_version" value="10" />
+        <classes>
+            <class name="org.com.BrowserStackAssignment.ElPaisScraper" />
+        </classes>
+    </test>
+    <test name="Thread5">
+        <parameter name="browser" value="Chrome" />
+        <parameter name="os" value="OS X" />
+        <parameter name="os_version" value="Ventura" />
+        <classes>
+            <class name="org.com.BrowserStackAssignment.ElPaisScraper" />
+        </classes>
+    </test>
+</suite>
