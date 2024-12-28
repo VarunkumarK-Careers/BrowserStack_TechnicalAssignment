@@ -14,7 +14,7 @@ import java.util.*;
 import static org.com.BrowserStackAssignment.JSONObject1.*;
 
 public class ElPaisScraper1 {
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) throws MalformedURLException, InterruptedException {
 
 
         // String USERNAME = "varunkumark_x7b0IK";
@@ -55,66 +55,72 @@ public class ElPaisScraper1 {
             WebElement Editorials = driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='El País Exprés']"));
             String Subheader = Editorials.getText();
             String SpanishText = "EL PAÍS EXPRÉS";
-            if(Subheader.equals(SpanishText)){
+            if (Subheader.equals(SpanishText)) {
                 System.out.println("Website text is displayed in Spanish:" + Subheader);
             } else {
                 System.out.println("Website text is not displayed in Spanish:" + Subheader);
             }
 
 
-
-
-
-
             driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='Opinión']")).click();
 
-            WebElement Header1 = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[2]/header[1]/h2[1]/a[1]"));
-            Header1.click();
 
             // Step 2: Fetch First Five Articles
-            List<WebElement> articles1 = driver.findElements(By.cssSelector(".a._g._g-lg._g-o"));
+            List<WebElement> articles = driver.findElements(By.cssSelector("._g._g-md._g-o.b.b-d"));
             Thread.sleep(3000);
 
 
-            Map<String, String> articleHeaders1 = new HashMap<>();
-            for (WebElement article1 : articles1) {
-                String title1 = article1.findElement(By.tagName("h1")).getText();
-                String content1 = article1.findElement(By.tagName("h2")).getText();
-                String News1 = article1.findElement(By.xpath("//div[@class='a_c clearfix']//p[1]")).getText();
-                System.out.println("Article Title1(Spanish): " + title1);
-                System.out.println("Article Content1(Spanish):" + content1);
-                System.out.println("Article News1(Spanish):" + News1);
-                articleHeaders1.put(title1,  translateText1(title1, content1, News1));
+            Map<String, String> articleHeaders = new HashMap<>();
+
+                for (int i = 0; i < Math.min(5, articles.size()); i++) {
+                    WebElement article = articles.get(i);
+                    String content = article.getText();
+                    System.out.println("Article Title1(Spanish): " + content);
 
 
-                // Fetch and download image
-                try {
-                    WebElement imageElement = article1.findElement(By.tagName("img"));
-                    String imageUrl = imageElement.getAttribute("src");
-                    saveImage1(imageUrl, title1.replaceAll("[^0-9]", "") + ".jpg");
-                } catch (Exception e) {
-                    System.out.println("Image not found for: " + title1);
+                    List<WebElement> h2Elements = driver.findElements(By.tagName("h2"));
+                    List<String> h2Texts = new ArrayList<>();
+                    for (int j = 0; j < Math.min(5, h2Elements.size()); j++) {
+                        WebElement h2 = h2Elements.get(j);
+                        String Title = h2.getText(); // Get the text from the h2 element
+                        h2Texts.add(Title);
+                        System.out.println("H2 Text is :" + Title); // Print each h2 text
+                        articleHeaders.put(Title, translateText1(Title));
+                    }
+
+
+                    // Fetch and download image
+                    try {
+                        WebElement imageElement = article.findElement(By.tagName("img"));
+                        String imageUrl = imageElement.getAttribute("src");
+                        saveImage1(imageUrl, content.replaceAll("[^0-9]", "") + ".jpg");
+                    } catch (Exception e) {
+                        System.out.println("Image not found for: " + content);
+                    }
                 }
-            }
 
-            // Step 3: Print Translated Titles
-            System.out.println("\nTranslated Headers:");
-            articleHeaders1.forEach((spanish, english) -> System.out.println("Spanish: " + spanish + " -> English: " + english));
+                // Step 3: Print Translated Titles
+                System.out.println("\nTranslated Headers:");
+                articleHeaders.forEach((spanish, english) -> System.out.println("Spanish: " + spanish + " -> English: " + english));
 
-            // Step 4: Analyze Translated Headers
-            analyzeRepeatedWords1(articleHeaders1.values());
+                // Step 4: Analyze Translated Headers
+                analyzeRepeatedWords1(articleHeaders.values());
 
-            // Step 5: Cross-Browser Testing with BrowserStack (not included here, see notes below)
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (driver != null) {
-                driver.quit();
+                // Step 5: Cross-Browser Testing with BrowserStack (not included here, see notes below)
+            } catch(Exception e){
+                e.printStackTrace();
+            } finally{
+                if (driver != null) {
+                    driver.quit();
+                }
             }
         }
     }
 
-}
+
+
+
+
 
 
 

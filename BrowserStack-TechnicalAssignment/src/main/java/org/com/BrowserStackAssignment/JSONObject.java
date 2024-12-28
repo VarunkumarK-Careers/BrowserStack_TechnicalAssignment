@@ -19,7 +19,7 @@ public class JSONObject {
 
 
 
-    public static String translateText(String title, String content, String News) {
+    public static String translateText(String AllHeader) {
         try {
             String apiKey = "0c1e75a0e4msh65faf643b9cac68p1f67f5jsn444e30548033";
             String apiUrl = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
@@ -34,7 +34,8 @@ public class JSONObject {
             connection.setDoOutput(true);
 
 
-            String jsonPayload = "{ \"q\": \"" + title + " " + content + " " + News + "\", \"from\": \"es\", \"to\": \"en\" }";
+
+            String jsonPayload = "{ \"q\": \"" + AllHeader + "\", \"from\": \"es\", \"to\": \"en\" }";
 
 
 

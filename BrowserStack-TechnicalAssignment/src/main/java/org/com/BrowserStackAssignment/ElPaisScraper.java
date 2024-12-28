@@ -66,31 +66,44 @@ public class ElPaisScraper {
 
             driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='Opinión']")).click();
 
-            WebElement Header = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[1]/header[1]/h2[1]/a[1]"));
-            Header.click();
 
             // Step 2: Fetch First Five Articles
-            List<WebElement> articles = driver.findElements(By.cssSelector(".a_e.a_e-o._g._g-xs"));
+            List<WebElement> articles = driver.findElements(By.cssSelector("._g._g-md._g-o.b.b-d"));
 
 
             Map<String, String> articleHeaders = new HashMap<>();
+            StringBuilder Header = new StringBuilder();
             for (WebElement article : articles) {
-                String title = article.findElement(By.tagName("h1")).getText();
-                String content = article.findElement(By.tagName("h2")).getText();
-                String News = article.findElement(By.xpath("//div[@class='a_c clearfix']//p[1]")).getText();
-                System.out.println("Article Title (Spanish): " + title);
-                System.out.println("Article Content(Spanish):" + content );
-                System.out.println("Article News(Spanish):" + News);
-                articleHeaders.put(title,  translateText(title, content, News));
+                String title1 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[1]/header[1]/h2[1]/a[1]")).getText();
+                String title2 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[2]/header[1]/h2[1]/a[1]")).getText();
+                String title3 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[3]/header[1]/h2[1]/a[1]")).getText();
+                String title4 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[2]/article[1]/header[1]/h2[1]/a[1]")).getText();
+                String title5 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[3]/article[1]/header[1]/h2[1]/a[1]")).getText();
+                String content1 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[1]/p[1]")).getText();
+                String content2 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[2]/p[1]")).getText();
+                String content3 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[3]/p[1]")).getText();
+                String content4 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[2]/article[1]/p[1]")).getText();
+                String content5 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[3]/article[1]/p[1]")).getText();
+
+                System.out.println("Article Title (Spanish): " + title1 + title2 + title3 + title4 + title5);
+                Header.append(title1).append("\n");
+                Header.append(title2).append("\n");
+                Header.append(title3).append("\n");
+                Header.append(title4).append("\n");
+                Header.append(title5).append("\n");
+                String AllHeader = Header.toString();
+                System.out.println(AllHeader);
+                System.out.println("Article Content(Spanish):" + content1 + content2 + content3 + content4 + content5);
+                articleHeaders.put(AllHeader,  translateText(AllHeader));
 
 
                 // Fetch and download image
                 try {
                     WebElement imageElement = article.findElement(By.tagName("img"));
                     String imageUrl = imageElement.getAttribute("src");
-                    saveImage(imageUrl, title.replaceAll("[^0-9]", "") + ".jpg");
+                    saveImage(imageUrl, title1.replaceAll("[^0-9]", "") + ".jpg");
                 } catch (Exception e) {
-                    System.out.println("Image not found for: " + title);
+                    System.out.println("Image not found for: " + title1);
                 }
             }
 
