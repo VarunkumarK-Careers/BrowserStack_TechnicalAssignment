@@ -25,7 +25,7 @@ public class JSONObject1 {
             String apiUrl = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
 
 
-
+            //Sending API Request to Rapid API using HTTPURLConnection
             HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -44,6 +44,7 @@ public class JSONObject1 {
                 os.flush();
             }
 
+            //Validating the response code
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
                 Scanner scanner = new Scanner(connection.getInputStream());

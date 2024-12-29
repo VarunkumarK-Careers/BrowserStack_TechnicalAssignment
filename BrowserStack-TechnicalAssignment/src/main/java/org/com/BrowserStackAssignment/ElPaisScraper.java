@@ -1,10 +1,8 @@
 package org.com.BrowserStackAssignment;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
@@ -38,8 +36,6 @@ public class ElPaisScraper {
             browserStackOptions.put("buildName", "BrowserStack TechAssignment");
             browserStackOptions.put("sessionName", "ELPaisScraper");
 
-
-
             caps.setCapability("bstack:options", browserStackOptions);
 
             driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub"), caps);
@@ -49,9 +45,11 @@ public class ElPaisScraper {
             driver.manage().window().maximize();
             Thread.sleep(2000);// Wait for page load
 
+            //Accepting the cookies
             WebElement cookies = driver.findElement(By.id("didomi-notice-agree-button"));
             cookies.click();
 
+            // Validating the website is loading in Spanish
             WebElement Editorials = driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='El País Exprés']"));
             String Subheader = Editorials.getText();
             String SpanishText = "EL PAÍS EXPRÉS";
@@ -68,7 +66,7 @@ public class ElPaisScraper {
             // Step 2: Fetch First Five Articles
             List<WebElement> articles = driver.findElements(By.cssSelector("._g._g-md._g-o.b.b-d"));
 
-
+            //fetching five articles using the xpath
             Map<String, String> articleHeaders = new HashMap<>();
             StringBuilder Header = new StringBuilder();
             for (WebElement article : articles) {
@@ -82,7 +80,7 @@ public class ElPaisScraper {
                 String content3 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[1]/article[3]/p[1]")).getText();
                 String content4 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[2]/article[1]/p[1]")).getText();
                 String content5 = article.findElement(By.xpath("/html[1]/body[1]/main[1]/div[1]/section[1]/div[3]/article[1]/p[1]")).getText();
-
+                //combining all the output into single output
                 System.out.println("Article Title (Spanish): " + title1 + title2 + title3 + title4 + title5);
                 Header.append(title1).append("\n");
                 Header.append(title2).append("\n");
@@ -105,14 +103,14 @@ public class ElPaisScraper {
                 }
             }
 
-            // Step 3: Print Translated Titles
+            // Print Translated Titles
             System.out.println("\nTranslated Headers:");
             articleHeaders.forEach((spanish, english) -> System.out.println("Spanish: " + spanish + " -> English: " + english));
 
-            // Step 4: Analyze Translated Headers
+            //Analyze Translated Headers
             analyzeRepeatedWords(articleHeaders.values());
 
-            // Step 5: Cross-Browser Testing with BrowserStack (not included here, see notes below)
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

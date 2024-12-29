@@ -1,11 +1,8 @@
 package org.com.BrowserStackAssignment;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
@@ -14,8 +11,6 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static org.com.BrowserStackAssignment.JSONObject1.*;
 
@@ -51,9 +46,11 @@ public class ElPaisScraper1 {
                 driver.manage().window().maximize();
                 Thread.sleep(2000);// Wait for page load
 
+                //Accepting the cookies
                 WebElement cookies = driver.findElement(By.id("didomi-notice-agree-button"));
                 cookies.click();
 
+            // Validating the website is loading in Spanish
                 WebElement Editorials = driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='El País Exprés']"));
                 String Subheader = Editorials.getText();
                 String SpanishText = "EL PAÍS EXPRÉS";
@@ -79,7 +76,7 @@ public class ElPaisScraper1 {
                     String content = article.getText();
                     System.out.println("Article Title1(Spanish): " + content);
 
-
+                    //Extracting first five header from all the articles
                     List<WebElement> h2Elements = driver.findElements(By.tagName("h2"));
                     List<String> h2Texts = new ArrayList<>();
                     for (int j = 0; j < Math.min(5, h2Elements.size()); j++) {
@@ -101,14 +98,14 @@ public class ElPaisScraper1 {
                     }
                 }
 
-                // Step 3: Print Translated Titles
+                //Print Translated Titles
                 System.out.println("\nTranslated Headers:");
                 articleHeaders.forEach((spanish, english) -> System.out.println("Spanish: " + spanish + " -> English: " + english));
 
-                // Step 4: Analyze Translated Headers
+                // Analyze Translated Headers
                 analyzeRepeatedWords1(articleHeaders.values());
 
-                // Step 5: Cross-Browser Testing with BrowserStack (not included here, see notes below)
+                //Cross-Browser Testing with BrowserStack (not included here, see notes below)
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
