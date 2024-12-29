@@ -21,7 +21,7 @@ public class JSONObject {
 
     public static String translateText(String AllHeader) {
         try {
-            String apiKey = "0c1e75a0e4msh65faf643b9cac68p1f67f5jsn444e30548033";
+            String apiKey = "30c6301883mshb4b9391f8488e10p1f6dbajsneb64f2d668c8";
             String apiUrl = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
 
 

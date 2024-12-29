@@ -1,50 +1,49 @@
 package org.com.BrowserStackAssignment;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Test;
 
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 import static org.com.BrowserStackAssignment.JSONObject.*;
 import static org.com.BrowserStackAssignment.JSONObject.translateText;
 
+
 public class ElPaisScraper {
-    public static void main(String[] args) throws MalformedURLException {
+    @Test
+    public  void BrowserStackTechAssignment() throws MalformedURLException {
 
 
-       // String USERNAME = "varunkumark_x7b0IK";
-        //String AUTOMATE_KEY = "dz6fww4CEEqAEqvhJqye";
-        //String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        WebDriver driver = new ChromeDriver(options);
-
-       // WebDriver driver = null;
+        String username = "varunkumark_x7b0IK";
+        String accessKey = "dz6fww4CEEqAEqvhJqye";
 
 
+        WebDriver driver = null;
         try {
-            // Step 1: Visit El País and Navigate to Opinion Section
 
-           /* ChromeOptions options = new ChromeOptions();
-            Map<String, Object> browserstackOptions = new HashMap<>();
 
-            browserstackOptions.put("os", "Windows");
-            browserstackOptions.put("osVersion", "11");
-            browserstackOptions.put("browserName", "Chrome");
-            browserstackOptions.put("browserVersion", "latest");
-            browserstackOptions.put("buildName", "ElPaisScraper Build");
-            browserstackOptions.put("sessionName", "ElPaisScraper Test");
+            DesiredCapabilities caps = new DesiredCapabilities();
 
-            options.setCapability("bstack:options", browserstackOptions);
 
-            driver = new RemoteWebDriver(new URL(URL), options);*/
+            Map<String, Object> browserStackOptions = new HashMap<>();
+            browserStackOptions.put("buildName", "BrowserStack TechAssignment");
+            browserStackOptions.put("sessionName", "ELPaisScraper");
+
+
+
+            caps.setCapability("bstack:options", browserStackOptions);
+
+            driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub"), caps);
+
             driver.get("https://elpais.com/");
             driver.manage().deleteAllCookies();
             driver.manage().window().maximize();
@@ -56,12 +55,11 @@ public class ElPaisScraper {
             WebElement Editorials = driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='El País Exprés']"));
             String Subheader = Editorials.getText();
             String SpanishText = "EL PAÍS EXPRÉS";
-            if(Subheader.equals(SpanishText)){
+            if (Subheader.equals(SpanishText)) {
                 System.out.println("Website text is displayed in Spanish:" + Subheader);
             } else {
                 System.out.println("Website text is not displayed in Spanish:" + Subheader);
             }
-
 
 
             driver.findElement(By.xpath("//a[@cmp-ltrk='portada_menu'][normalize-space()='Opinión']")).click();
@@ -94,7 +92,7 @@ public class ElPaisScraper {
                 String AllHeader = Header.toString();
                 System.out.println(AllHeader);
                 System.out.println("Article Content(Spanish):" + content1 + content2 + content3 + content4 + content5);
-                articleHeaders.put(AllHeader,  translateText(AllHeader));
+                articleHeaders.put(AllHeader, translateText(AllHeader));
 
 
                 // Fetch and download image
