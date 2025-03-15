@@ -1,0 +1,102 @@
+El País Opinion Scraper
+
+Overview
+
+This project scrapes articles from the Opinion section of El País, a Spanish news outlet. It extracts article titles and content, downloads cover images, translates titles to English, analyzes repeated words in translated headers, and performs cross-browser testing.
+
+Features
+
+Scrape Opinion Articles: Fetch the first five articles from the Opinion section.
+
+Extract and Print Content: Retrieve article titles and content in Spanish.
+
+Download Cover Images: Save article cover images (if available) locally.
+
+Translate Titles: Use a translation API to translate article titles to English.
+
+Analyze Headers: Identify words repeated more than twice in translated headers.
+
+Cross-Browser Testing: Validate functionality locally and test using BrowserStack across multiple browsers and devices.
+
+Prerequisites
+
+Java 11+
+
+Selenium WebDriver
+
+BrowserStack account (for testing)
+
+API key for translation service (e.g., Google Translate API or Rapid Translate Multi Traduction API)
+
+Web scraping libraries (JSoup, Selenium, etc.)
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/your-repo/el-pais-opinion-scraper.git
+cd el-pais-opinion-scraper
+
+Install dependencies:
+
+Add Selenium WebDriver and JSoup dependencies to your project.
+
+If using Maven, update pom.xml:
+
+<dependencies>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.x.x</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>1.x.x</version>
+    </dependency>
+</dependencies>
+
+Set up environment variables for API keys and BrowserStack credentials.
+
+Usage
+
+Run the Scraper
+
+mvn clean install
+java -jar target/el-pais-opinion-scraper.jar
+
+Check Downloaded Files:
+
+Extracted article text will be printed in the console.
+
+Cover images will be saved in a local directory.
+
+Review Translations & Analysis:
+
+Translated headers will be displayed.
+
+Word frequency analysis will be printed.
+
+Perform Cross-Browser Testing:
+
+java -jar target/browserstack-test.jar
+
+Output
+
+Titles and content of articles (Spanish)
+
+Translated article titles (English)
+
+Word frequency count of translated headers
+
+Downloaded cover images (if available)
+
+Cross-browser testing results
+
+Notes
+
+Ensure that El País allows scraping and follows their robots.txt rules.
+
+API usage may require authentication and rate limits.
+
+Modify config.properties to set API keys and BrowserStack credentials.

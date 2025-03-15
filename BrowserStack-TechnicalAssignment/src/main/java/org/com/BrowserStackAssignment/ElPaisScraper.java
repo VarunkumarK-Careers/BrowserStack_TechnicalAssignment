@@ -21,8 +21,8 @@ public class ElPaisScraper {
     public  void BrowserStackTechAssignment() throws MalformedURLException {
 
 
-        String username = "varunkumark_x7b0IK";
-        String accessKey = "dz6fww4CEEqAEqvhJqye";
+        String username = "**********";
+        String accessKey = "**********";
 
 
         WebDriver driver = null;

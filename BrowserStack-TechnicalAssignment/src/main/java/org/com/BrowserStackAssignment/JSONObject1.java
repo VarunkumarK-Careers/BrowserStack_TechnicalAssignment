@@ -44,6 +44,7 @@ public class JSONObject1 {
                 os.flush();
             }
 
+
             //Validating the response code
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {

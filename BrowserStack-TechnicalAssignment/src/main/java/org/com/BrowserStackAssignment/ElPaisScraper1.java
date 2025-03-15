@@ -20,8 +20,8 @@ public class ElPaisScraper1 {
     public void BrowserStackTechAssignment1() throws MalformedURLException, InterruptedException {
 
 
-        String username = "varunkumark_x7b0IK";
-        String accessKey = "dz6fww4CEEqAEqvhJqye";
+        String username = "*********";
+        String accessKey = "*********";
 
 
         WebDriver driver = null;
@@ -45,6 +45,8 @@ public class ElPaisScraper1 {
                 driver.manage().deleteAllCookies();
                 driver.manage().window().maximize();
                 Thread.sleep(2000);// Wait for page load
+
+
 
                 //Accepting the cookies
                 WebElement cookies = driver.findElement(By.id("didomi-notice-agree-button"));
@@ -94,6 +96,9 @@ public class ElPaisScraper1 {
                         String imageUrl = imageElement.getAttribute("src");
                         saveImage1(imageUrl, content.replaceAll("[^0-9]", "") + ".jpg");
                     } catch (Exception e) {
+
+
+
                         System.out.println("Image not found for: " + content);
                     }
                 }
@@ -105,7 +110,7 @@ public class ElPaisScraper1 {
                 // Analyze Translated Headers
                 analyzeRepeatedWords1(articleHeaders.values());
 
-                //Cross-Browser Testing with BrowserStack (not included here, see notes below)
+
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
